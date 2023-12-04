@@ -5,3 +5,5 @@ const ErrorModal = () => {
         </div>
     )
 };
+
+export default ErrorModal;

@@ -5,13 +5,10 @@ import DeleteConfirmationModal from './components/modals/DeleteConfirmationModal
 import axios from 'axios';
 import './App.css';
 
-// give it a nicer font
-// accessability - lighthouse 
-// double check file structure for consistency 
 function App() {
   const [data, setData] = useState([]); // can we implement some sort of caching so we don't have to refetch all db entries
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false); // vague name
+  const [showModal, setShowModal] = useState(false);
   const [transactionType, setTransactionType] = useState('');
   const [dbUpdated, setDbUpdated] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -37,7 +34,7 @@ function App() {
         const res = await axios.get('http://localhost:3001');
         setData(res.data);
         setIsLoading(false);
-        setDbUpdated(false); // prob not the right way to listen for db updates
+        setDbUpdated(false); // not the right way to listen for db updates
       } catch (error) {
         console.error(error)
       }

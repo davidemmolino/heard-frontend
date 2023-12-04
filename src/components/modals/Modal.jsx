@@ -2,11 +2,16 @@ import { useState } from 'react';
 import Form from '../Form';
 import axios from 'axios';
 
+/**
+ * 
+ * add here
+ * 
+ */
+// because we're using the same component for creating new and editing entries
+// type can be new or edit
+// when its edit we need to pass props so we can edit the form
+// when it's new we can just leave all fields empty
 const Modal = ({ type, setShowModal, setDbUpdated, entryToEdit }) => {
-    // because we're using the same component for creating new and editing entries
-    // type can be new or edit
-    // when its edit we need to pass props so we can edit the form
-    // when it's new we can just leave all fields empty
     const [title, setTitle] = useState(type == 'Edit' ? entryToEdit.title : '');
     const [description, setDescription] = useState(type == 'Edit' ? entryToEdit.description : '');
     const [amount, setAmount] = useState(type == 'Edit' ? entryToEdit.amount : 0);
