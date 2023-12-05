@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Form from '../Form';
 import axios from 'axios';
-
+import { ADD, EDIT } from '../../utils/constants';
 /**
  * 
  * add here
@@ -12,19 +12,17 @@ import axios from 'axios';
 // when its edit we need to pass props so we can edit the form
 // when it's new we can just leave all fields empty
 const Modal = ({ type, setShowModal, setDbUpdated, entryToEdit }) => {
-    const [title, setTitle] = useState(type == 'Edit' ? entryToEdit.title : '');
-    const [description, setDescription] = useState(type == 'Edit' ? entryToEdit.description : '');
-    const [amount, setAmount] = useState(type == 'Edit' ? entryToEdit.amount : 0);
-    const [fromAccount, setFromAccount] = useState(type == 'Edit' ? entryToEdit.fromAccount : '');
-    const [toAccount, setToAccount] = useState(type == 'Edit' ? entryToEdit.toAccount : '');
-    const [transactionDate, setTransactionDate] = useState(type == 'Edit' ? entryToEdit.transactionDate : ''); 
-    const [transactionId, setTransactionId] = useState(type == 'Edit' ? entryToEdit.transactionId : '');
+    const [title, setTitle] = useState(type === 'Edit' ? entryToEdit.title : '');
+    const [description, setDescription] = useState(type === 'Edit' ? entryToEdit.description : '');
+    const [amount, setAmount] = useState(type === 'Edit' ? entryToEdit.amount : 0);
+    const [fromAccount, setFromAccount] = useState(type === 'Edit' ? entryToEdit.fromAccount : '');
+    const [toAccount, setToAccount] = useState(type === 'Edit' ? entryToEdit.toAccount : '');
+    const [transactionId, setTransactionId] = useState(type === 'Edit' ? entryToEdit.transactionId : '');
 
     const handleTransaction = async () => { 
       const currentDate = new Date().toISOString();
-      setTransactionDate(currentDate);
 
-        if (type == 'Add') {
+        if (type === ADD) {
             // form validation before sending out the POST req? mongoose already doing some validation
             const transactionShape = {
                 title,
@@ -46,7 +44,7 @@ const Modal = ({ type, setShowModal, setDbUpdated, entryToEdit }) => {
             }
         }
 
-        if (type == 'Edit') {
+        if (type === EDIT) {
             const transactionShape = {
                 title,
                 description,
@@ -109,7 +107,7 @@ const Modal = ({ type, setShowModal, setDbUpdated, entryToEdit }) => {
                     type="button"
                     onClick={() => handleTransaction()}
                   >
-                    {type == 'Edit' ? 'Save Changes' : 'Create' }
+                    {type === 'Edit' ? 'Save Changes' : 'Create' }
                   </button>
                 </div>
               </div>
